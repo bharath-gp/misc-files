@@ -1,10 +1,25 @@
 #!/bin/bash
 if [ -z "$1" ]
 then
-	echo "Provide version number as argument"
-	exit 1
+        echo "Provide version number as argument"
+        exit 1
 fi
-VERSION=$1
+if [ -z "$2" ]
+then
+        RELEASE=watson
+else
+        RELEASE=$2
+fi
+VERSIONNUMBER=$1
+if [ "$RELEASE" == "watson" ]
+then
+        VERSION=4.5.0-$VERSIONNUMBER
+else
+        VERSION=4.1.0-$VERSIONNUMBER
+fi
+echo $RELEASE
+echo $VERSION
+echo $VERSIONNUMBER
 rpm -e couchbase-server
 rm -rf /tmp/rpm
 mkdir /tmp/rpm
